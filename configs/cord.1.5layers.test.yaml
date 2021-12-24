@@ -120,7 +120,7 @@ model_param:
 toy_data: false
 toy_size: 4
 train_param:
-  accelerator: ddp
+  accelerator: dp
   accumulate_grad_batches: 2
   augment_coord: true
   augment_data: true
@@ -162,7 +162,7 @@ train_param:
       lr_max: 0.0007
       num_warmup_steps: 30
   max_epochs: 10000
-  multi_gpu: true
+  multi_gpu: false
   n_cpus: 2
   optimizer_type: adam
   save_epoch_interval: 100

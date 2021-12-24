@@ -95,5 +95,5 @@ def do_prediction(cfg, path_predict_input_json):
     data_module.path_predict_input_json = path_predict_input_json
     out = trainer.predict(model, datamodule=data_module)[0]
     path_to_save = path_predict_input_json.__str__() + ".out.json"
-    gu.write_json(path_to_save, out)
+    gu.write_json(path_to_save, out['pr_parse'])
     pprint(out["pr_parse"])
