@@ -436,13 +436,13 @@ class SpadeData(torch.utils.data.Dataset):
             "text_tok": text_tok,
             "text_tok_id": torch.as_tensor(text_tok_id),
             "label": torch.as_tensor(label) if self.mode != "infer" else label,
-            "label_tok": torch.as_tensor(label_tok),
-            "rn_center_tok": torch.as_tensor(rn_center_tok),
-            "rn_dist_tok": torch.as_tensor(rn_dist_tok),
-            "rn_angle_tok": torch.as_tensor(rn_angle_tok),
-            "vertical_tok": torch.as_tensor(vertical_tok),
-            "char_size_tok": torch.as_tensor(char_size_tok),
-            "header_tok": torch.as_tensor(header_tok),
+            "label_tok": torch.as_tensor(label_tok, dtype=torch.int64),
+            "rn_center_tok": torch.as_tensor(rn_center_tok, dtype=torch.int64),
+            "rn_dist_tok": torch.as_tensor(rn_dist_tok, dtype=torch.int64),
+            "rn_angle_tok": torch.as_tensor(rn_angle_tok, dtype=torch.int64),
+            "vertical_tok": torch.as_tensor(vertical_tok, dtype=torch.int64),
+            "char_size_tok": torch.as_tensor(char_size_tok, dtype=torch.int64),
+            "header_tok": torch.as_tensor(header_tok, dtype=torch.int64),
         }
 
         return feature
