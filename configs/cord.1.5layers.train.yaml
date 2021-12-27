@@ -119,11 +119,11 @@ model_param:
 toy_data: false
 toy_size: 4
 train_param:
-  accelerator: dp
+  accelerator: ddp
   accumulate_grad_batches: 2
   augment_coord: true
   augment_data: true
-  batch_size: 2
+  batch_size: 1
   batch_size_for_test: 2
   coord_aug_params_keys: '[n_min, n_max, amp_min, amp_max, angle_min, angle_max],  [0,
     2, -15, 15, -10, 10]'
