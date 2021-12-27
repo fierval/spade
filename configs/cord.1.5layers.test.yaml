@@ -120,7 +120,7 @@ model_param:
 toy_data: false
 toy_size: 4
 train_param:
-  accelerator: dp
+  accelerator: ddp
   accumulate_grad_batches: 2
   augment_coord: true
   augment_data: true
