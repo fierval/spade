@@ -122,7 +122,7 @@ class SpadeDataModule(pl.LightningDataModule):
             batch_size=self.batch_size,
             dataset=self.train_data,
             shuffle=True,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
         return loader
@@ -132,7 +132,7 @@ class SpadeDataModule(pl.LightningDataModule):
             batch_size=self.batch_size_for_test,
             dataset=self.dev_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
         return loader
@@ -181,14 +181,14 @@ class SpadeDataModule(pl.LightningDataModule):
             batch_size=self.batch_size_for_test,
             dataset=dev_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
         test_loader = DataLoader(
             batch_size=self.batch_size_for_test,
             dataset=test_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
 
@@ -196,7 +196,7 @@ class SpadeDataModule(pl.LightningDataModule):
             batch_size=self.batch_size_for_test,
             dataset=op_dev_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
 
@@ -204,7 +204,7 @@ class SpadeDataModule(pl.LightningDataModule):
             batch_size=self.batch_size_for_test,
             dataset=op_test_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
 

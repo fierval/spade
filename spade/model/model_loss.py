@@ -21,7 +21,7 @@ def Loss_rt(score, label, n_fields, l_units, loss_weights):
             _label = label1.unsqueeze(0)
             loss += F.cross_entropy(
                 score[b : b + 1, st_rel : (st_rel + 2), :nr1, :nc1],
-                _label,
+                _label.type(torch.long),
                 weight=loss_weights.type_as(score),
             )
 
