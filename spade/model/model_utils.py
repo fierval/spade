@@ -268,7 +268,7 @@ def pad_ids(ids, max_length=None, type_informer_tensor=None):
 
     # tensor
     if isinstance(ids_tensor, np.ndarray):
-        ids_tensor = torch.tensor(ids_tensor, dtype=torch.int64)
+        ids_tensor = torch.tensor(ids_tensor)
     return ids_tensor.type_as(type_informer_tensor)
 
 

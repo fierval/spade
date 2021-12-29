@@ -2,7 +2,7 @@
 # Copyright (c) 2021-present NAVER Corp.
 # Apache License v2.0
 
-import time
+import time, sys
 from pathlib import Path
 from typing import List, Union
 
@@ -151,7 +151,7 @@ class SpadeDataModule(pl.LightningDataModule):
             batch_size=self.batch_size_for_test,
             dataset=predict_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus  if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
         return loader
@@ -162,14 +162,14 @@ class SpadeDataModule(pl.LightningDataModule):
             batch_size=self.batch_size_for_test,
             dataset=dev_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
         test_loader = DataLoader(
             batch_size=self.batch_size_for_test,
             dataset=test_data,
             shuffle=False,
-            num_workers=self.cfg.train_param.n_cpus,
+            num_workers=self.cfg.train_param.n_cpus if sys.platform != 'win32' else 0,
             collate_fn=lambda x: x,
         )
 
@@ -436,13 +436,13 @@ class SpadeData(torch.utils.data.Dataset):
             "text_tok": text_tok,
             "text_tok_id": torch.as_tensor(text_tok_id),
             "label": torch.as_tensor(label) if self.mode != "infer" else label,
-            "label_tok": torch.as_tensor(label_tok, dtype=torch.int64),
-            "rn_center_tok": torch.as_tensor(rn_center_tok, dtype=torch.int64),
-            "rn_dist_tok": torch.as_tensor(rn_dist_tok, dtype=torch.int64),
-            "rn_angle_tok": torch.as_tensor(rn_angle_tok, dtype=torch.int64),
-            "vertical_tok": torch.as_tensor(vertical_tok, dtype=torch.int64),
-            "char_size_tok": torch.as_tensor(char_size_tok, dtype=torch.int64),
-            "header_tok": torch.as_tensor(header_tok, dtype=torch.int64),
+            "label_tok": torch.as_tensor(label_tok),
+            "rn_center_tok": torch.as_tensor(rn_center_tok),
+            "rn_dist_tok": torch.as_tensor(rn_dist_tok),
+            "rn_angle_tok": torch.as_tensor(rn_angle_tok),
+            "vertical_tok": torch.as_tensor(vertical_tok),
+            "char_size_tok": torch.as_tensor(char_size_tok),
+            "header_tok": torch.as_tensor(header_tok),
         }
 
         return feature

@@ -542,7 +542,7 @@ class RelationTagger(pl.LightningModule):
 
     @rank_zero_only
     @gu.timeit
-    def predict_step(self, batch, batch_idx):
+    def predict_step(self, batch, batch_idx, dataloader_idx):
         results = self._run("test", batch)
         assert len(results["data_ids"]) == 1
         test_out = {
